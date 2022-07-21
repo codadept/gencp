@@ -1,0 +1,97 @@
+/**
+ * @author Pratik Majumdar (codadept)
+ * @date DATE
+ *
+ * @copyright Copyright (c) YEAR
+ *
+ */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define fast               \
+  ios::sync_with_stdio(0); \
+  cin.tie(0);              \
+  cout.tie(0)
+
+#define int long long
+#define endl "\n"
+#define vi vector<int>
+#define vs vector<string>
+#define v(_obj) vector<_obj>
+#define pii pair<int, int>
+#define vpii v(pii)
+#define vvi v(vi)
+
+#define loop(i, n) for (int i = 0; i < n; i++)
+#define loop_num(i, j, n) for (int i = j; i < n; i++)
+#define rloop(i, n) for (int i = n; i >= 0; i--)
+#define rloop_num(i, j, n) for (int i = n; i >= j; i--)
+#define objloop(i, _obj) for (auto i = _obj.begin(); i != _obj.end(); i++)
+#define wloop(n) while (n--)
+
+constexpr void input(){};
+template <typename T, typename... Ts>
+void input(T &arg, Ts &...args) {
+  cin >> arg;
+  input(args...);
+}
+
+constexpr void print(){};
+template <typename T, typename... Ts>
+void print(T arg, Ts... args) {
+  cout << arg << " ";
+  print(args...);
+}
+
+inline void println() { cout << endl; }
+template <typename... Ts>
+void println(Ts... args) {
+  print(args...);
+  println();
+}
+
+// Vector
+template <typename T>
+void vin(vector<T> &v) {
+  loop(i, v.size()) {
+    input(v[i]);
+  }
+}
+
+template <typename T>
+void vin(vector<T> &v, int n) {
+  loop(i, n) {
+    int t;
+    input(t);
+    v.push_back(t);
+  }
+}
+
+template <typename T>
+void vout(vector<T> &v) {
+  objloop(i, v) { print(*i); }
+  println();
+}
+
+int max(int a, int b) { return ((a > b) ? a : b); }
+int min(int a, int b) { return ((a > b) ? b : a); }
+
+inline void solve();
+
+int32_t main() {
+  fast;
+
+  int t;
+
+  input(t);
+
+  wloop(t) {
+    solve();
+  }
+  return 0;
+}
+// Solve your code here
+
+inline void solve() {
+}
