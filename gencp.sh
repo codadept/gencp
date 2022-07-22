@@ -25,6 +25,8 @@ then
   echo "export CP_USERNAME='${CP_USERNAME}'" >> ${HOME}/.gencp
 fi
 
+echo -e "\n\033[32mOne time setup complete.\033[m\n"
+
 if [ ! -d $CP_PATH ]
 then
   mkdir $CP_PATH
@@ -44,7 +46,7 @@ fi
 if [ ! -d $CP_PLATFORM_FOLDER ]
 then
   mkdir $CP_PLATFORM_FOLDER
-  echo -e "\n$CP_PLATFORM_NAME folder created in your coding directory!" 
+  echo -e "\n$CP_PLATFORM_NAME folder created in your coding directory!\n" 
 fi
 
 CP_CONTEST_NAME=''
