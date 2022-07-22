@@ -25,9 +25,10 @@ then
   echo "export CP_PATH='${CP_PATH}'" >> ${HOME}/.gencp
   echo "export CP_NAME='${CP_NAME}'" >> ${HOME}/.gencp
   echo "export CP_USERNAME='${CP_USERNAME}'" >> ${HOME}/.gencp
+  echo -e "\n\033[32mOne time setup complete.\033[m\n"
 fi
 
-echo -e "\n\033[32mOne time setup complete.\033[m\n"
+echo ""
 
 if [ ! -d $CP_PATH ]
 then
