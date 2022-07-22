@@ -1,5 +1,7 @@
 #! /bin/bash
 
+PARENT_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+
 if [ -f "${HOME}/.gencp" ]
 then
   source "${HOME}/.gencp"
@@ -85,7 +87,7 @@ done
 echo "Please select from the given available languages:"
 
 COUNTER=1
-LANGS=`ls ./templates/`
+LANGS=`/bin/ls $PARENT_PATH/templates/`
 for LANG in $LANGS
 do
   IFS="."
@@ -125,7 +127,7 @@ RESPONSE="${INPUT:-$RESPONSE}"
 
 for (( FILES=0; FILES<$CP_QUESTIONS; FILES++ ))
 do
-  cp "./templates/${AVAIL_LANGS[$(( $CP_LANG_IDX - 1 ))]}" "${CP_CONTEST_FOLDER}/${QUESTIONS:$FILES:1}.${SELECTED_LANG}"
+  cp "$PARENT_PATH/templates/${AVAIL_LANGS[$(( $CP_LANG_IDX - 1 ))]}" "${CP_CONTEST_FOLDER}/${QUESTIONS:$FILES:1}.${SELECTED_LANG}"
   sed -i "s|\bDATE\b|${DATE}|g" "${CP_CONTEST_FOLDER}/${QUESTIONS:$FILES:1}.${SELECTED_LANG}"
   sed -i "s|\bNAME\b|${CP_NAME}|g" "${CP_CONTEST_FOLDER}/${QUESTIONS:$FILES:1}.${SELECTED_LANG}"
   sed -i "s|\bUSERNAME\b|${CP_USERNAME}|g" "${CP_CONTEST_FOLDER}/${QUESTIONS:$FILES:1}.${SELECTED_LANG}"
