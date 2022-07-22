@@ -1,8 +1,8 @@
 /**
- * @author Pratik Majumdar (codadept)
- * @date DATE
  *
- * @copyright Copyright (c) YEAR
+ * @author NAME (USERNAME)
+ * @date DATE
+ * @contest CONTEST
  *
  */
 

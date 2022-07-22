@@ -80,9 +80,63 @@ do
   read CP_QUESTIONS
 done
 
-for (( FILES=0; FILES<$CP_QUESTIONS; FILES++ ))
+echo "Please select from the given available languages:"
+
+COUNTER=1
+LANGS=`ls ./templates/`
+for LANG in $LANGS
 do
-  echo ${QUESTIONS:$FILES:1}
+  IFS="."
+  read -a LANG <<< $LANG
+  echo -e "\t${COUNTER}) ${LANG[0]}"
+  (( COUNTER ++ ))
+done
+unset IFS
+
+echo -e ": \c"
+read CP_LANG_IDX
+
+NUMBER_RE='^[0-9]+$'
+
+while [[ ! $CP_LANG_IDX =~ $NUMBER_RE ]]
+do
+  echo -e "Please enter a number!\n: \c"
+  read CP_LANG_IDX
 done
 
+while ! [ $CP_LANG_IDX -gt 0 -a $CP_LANG_IDX -lt $COUNTER ]
+do
+  echo -e "The number should be greater than 0 and less than or equal to $(( COUNTER - 1))!\n: \c"
+  read CP_LANG_IDX
+done
 
+AVAIL_LANGS=( $LANGS )
+IFS="."
+read -a SELECTED_LANG <<< "${AVAIL_LANGS[$(( $CP_LANG_IDX - 1 ))]}"
+SELECTED_LANG=${SELECTED_LANG[0]}
+
+DATE=`date "+%Y-%m-%d %H:%M:%S"`
+
+RESPONSE='y'
+read -e -i "$RESPONSE" -p "Do you want to open in VSCode? [y/n] " INPUT
+RESPONSE="${INPUT:-$RESPONSE}"
+
+for (( FILES=0; FILES<$CP_QUESTIONS; FILES++ ))
+do
+  cp "./templates/${AVAIL_LANGS[$(( $CP_LANG_IDX - 1 ))]}" "${CP_CONTEST_FOLDER}/${QUESTIONS:$FILES:1}.${SELECTED_LANG}"
+  sed -i "s|\bDATE\b|${DATE}|g" "${CP_CONTEST_FOLDER}/${QUESTIONS:$FILES:1}.${SELECTED_LANG}"
+  sed -i "s|\bNAME\b|${CP_NAME}|g" "${CP_CONTEST_FOLDER}/${QUESTIONS:$FILES:1}.${SELECTED_LANG}"
+  sed -i "s|\bUSERNAME\b|${CP_USERNAME}|g" "${CP_CONTEST_FOLDER}/${QUESTIONS:$FILES:1}.${SELECTED_LANG}"
+  sed -i "s|\bCONTEST\b|${CP_CONTEST_NAME}|g" "${CP_CONTEST_FOLDER}/${QUESTIONS:$FILES:1}.${SELECTED_LANG}"
+  if ! [ -x "$(command -v code)" ] 
+  then
+    echo "VSCode is not installed."
+  else
+    if [ $RESPONSE == "y" -o $RESPONSE == "Y" ]
+    then
+      code "${CP_CONTEST_FOLDER}/${QUESTIONS:$FILES:1}.${SELECTED_LANG}"
+    fi
+  fi
+done
+
+echo "Your template generated on $DATE. Gambatte!"
