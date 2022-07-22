@@ -5,7 +5,7 @@ then
   source "${HOME}/.gencp"
 fi
 
-echo -e "Hey \033[32m${USER}\033[m! \n\033[0;31mgencp\033[0m: Tool made by @codadept"
+echo -e "Hey \033[32m${USER}\033[m! \n\033[0;31mgencp\033[0m: Tool made by @codadept (Pratik Majumdar)"
 
 if [[ -z ${CP_PATH} ]] || [[ -z ${CP_NAME} ]] || [[ -z ${CP_USERNAME} ]]
 then
